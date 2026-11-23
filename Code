@@ -1,0 +1,89 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class GuiLatihan {
+    public static void main(String[] args) {
+        new FrameUtama().setVisible(true);
+    }
+}
+
+class FrameUtama extends JFrame {
+
+    public FrameUtama() {
+        setTitle("Latihan GUI");
+        setSize(400, 200);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        add(new PanelForm(), BorderLayout.CENTER);
+    }
+}
+
+class PanelForm extends JPanel {
+
+    JTextField txtNama = new JTextField(15);
+    JLabel lblHasil = new JLabel("Hasil akan muncul di sini", JLabel.CENTER);
+    TombolKu btnTampil = new TombolKu("Tampilkan");
+    TombolKu btnHapus = new TombolKu("Hapus");
+
+    public PanelForm() {
+        setLayout(new BorderLayout());
+
+        JPanel panelAtas = new JPanel(new FlowLayout());
+        panelAtas.add(new JLabel("Nama:"));
+        panelAtas.add(txtNama);
+
+        JPanel panelTombol = new JPanel(new GridLayout(1, 2));
+        panelTombol.add(btnTampil);
+        panelTombol.add(btnHapus);
+
+        add(panelAtas, BorderLayout.NORTH);
+        add(lblHasil, BorderLayout.CENTER);
+        add(panelTombol, BorderLayout.SOUTH);
+
+        btnTampil.addActionListener(new AksiTampil(txtNama, lblHasil));
+        btnHapus.addMouseListener(new AksiHapus(txtNama, lblHasil));
+    }
+}
+
+class TombolKu extends JButton {
+
+    public TombolKu(String teks) {
+        super(teks);
+        setBackground(Color.LIGHT_GRAY);
+        setFocusPainted(false);
+    }
+}
+
+class AksiTampil implements ActionListener {
+
+    JTextField txtNama;
+    JLabel lblHasil;
+
+    public AksiTampil(JTextField txtNama, JLabel lblHasil) {
+        this.txtNama = txtNama;
+        this.lblHasil = lblHasil;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        lblHasil.setText("Halo, " + txtNama.getText());
+    }
+}
+
+class AksiHapus extends MouseAdapter {
+
+    JTextField txtNama;
+    JLabel lblHasil;
+
+    public AksiHapus(JTextField txtNama, JLabel lblHasil) {
+        this.txtNama = txtNama;
+        this.lblHasil = lblHasil;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        txtNama.setText("");
+        lblHasil.setText("Hasil akan muncul di sini");
+    }
+}
