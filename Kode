@@ -1,0 +1,10 @@
+public class GuiLatihan extends JFrame {
+
+    JTextField txtNama = new JTextField(15);
+    JLabel lblHasil = new JLabel("Hasil akan muncul di sini", JLabel.CENTER);
+
+    public GuiLatihan() {
+        setTitle("Latihan GUI");
+        setSize(400, 200);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
